@@ -18,30 +18,30 @@ type HelloWorld struct {
 var _ api.HelloWorldInterface = &HelloWorld{}
 
 func New() (*HelloWorld, error) {
-	sw := &HelloWorld{
+	hw := &HelloWorld{
 		store:   make(map[string]string),
 		capital: CAPITAL,
 	}
-	return sw, nil
+	return hw, nil
 }
 
-func (h *HelloWorld) Get() (string, error) {
-	val, ok := h.store[COUNTRY]
+func (hw *HelloWorld) Get() (string, error) {
+	capital, ok := hw.store[COUNTRY]
 	if !ok {
 		return "", errors.New("BD capital not found")
 	}
-	return val, nil
+	return capital, nil
 }
 
-func (h *HelloWorld) Set(capital string) error {
-	if _, ok := h.store[COUNTRY]; ok {
+func (hw *HelloWorld) Set(capital string) error {
+	if _, ok := hw.store[COUNTRY]; ok {
 		return errors.New("already exists")
 	}
 
-	h.store[COUNTRY] = capital
+	hw.store[COUNTRY] = capital
 	return nil
 }
 
-func (h *HelloWorld) Capital() string {
-	return h.capital
+func (hw *HelloWorld) Capital() string {
+	return hw.capital
 }
